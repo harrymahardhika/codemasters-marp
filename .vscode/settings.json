@@ -1,0 +1,6 @@
+{
+	"markdown.marp.themes": [
+		"./.themes/turing.css",
+		"./.themes/one.css",
+	]
+}
