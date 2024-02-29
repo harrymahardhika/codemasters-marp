@@ -5,17 +5,17 @@ theme: one
 
 # Understanding APIs
 
-## An Introduction to API Concepts
+An Introduction to API Concepts
 
 ---
 
-## What is an API?
+# What is an API?
 
 - An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and interact with each other.
 
 ---
 
-## Why APIs Matter
+# Why APIs Matter
 
 - Enable integration between different software systems.
 - Facilitate data exchange and functionality sharing.
@@ -23,7 +23,7 @@ theme: one
 
 ---
 
-## Different Types of APIs
+# Different Types of APIs
 
 - **Web APIs (HTTP/HTTPS):**
   - APIs that use HTTP/HTTPS protocols to communicate over the web.
@@ -36,7 +36,7 @@ theme: one
 
 ---
 
-## API Request and Response Cycle
+# API Request and Response Cycle
 
 - Request: A client sends a request to an API with specific parameters or data.
 - Processing: The API processes the request, performs actions, or retrieves data.
@@ -44,13 +44,13 @@ theme: one
 
 ---
 
-## Introduction to REST API
+# Introduction to REST API
 
 - REST (Representational State Transfer) is an architectural style for designing networked applications. RESTful APIs follow REST principles.
 
 ---
 
-## REST API Characteristics
+# REST API Characteristics
 
 - **Stateless:** No client session data is stored on the server.
 - **Client-Server Architecture:** Separation of concerns between client and server.
@@ -60,7 +60,7 @@ theme: one
 
 ---
 
-## Advantages of Using RESTful APIs
+# Advantages of Using RESTful APIs
 
 - **Scalability:** Easily scalable due to its statelessness.
 - **Simplicity:** Simple and intuitive for developers.
@@ -69,18 +69,8 @@ theme: one
 
 ---
 
-## Wrapping Up
+# Wrapping Up
 
 - APIs enable software communication and integration.
 - Different types of APIs serve various purposes.
 - RESTful APIs follow REST principles, promoting simplicity and scalability.
-
----
-
-## Questions and Discussion
-
----
-
-## Thank You!
-
-- Your contact information for further inquiries or discussions.

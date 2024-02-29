@@ -9,7 +9,7 @@ theme: one
 
 # What is REST API?
 
-- REST API adalah salah satau pendekatan arsitektur yang digunakan dalam pengembangan layanan web (web service).
+- REST API adalah salah satu pendekatan arsitektur yang digunakan dalam pengembangan layanan web (web service).
 - REST API berfokus pada sumber daya (resources) dan bagaimana sumber daya diakses melalui permintaan HTTP.
 
 ---

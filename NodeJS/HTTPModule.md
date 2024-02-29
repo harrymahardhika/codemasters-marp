@@ -89,7 +89,7 @@ Referensi:
 
 ---
 
-![HTTP Status Code](http-status-code.png)
+![bg](http-status-code.png)
 
 ---
 
@@ -127,13 +127,9 @@ server.listen(port, () => {
 })
 ```
 
-Dalam contoh, kita membuat server yang mendengarkan request HTTP di port 3000. Ketika request diterima, server akan mengirimkan response berisi teks "Hello World!".
-
 ---
 
 ## Menangani Request HTTP
-
-Contoh berikut menunjukkan cara menangani request untuk route tertentu:
 
 ```javascript
 const http = require('http')
@@ -147,39 +143,6 @@ const server = http.createServer((req, res) => {
     res.end('Page not found\n')
   }
 })
-
-const port = 3000
-
-server.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}/`)
-})
-```
-
----
-
-## Middleware dalam Node.js
-
-- Anda dapat menggunakan middleware untuk memproses permintaan sebelum sampai ke penanganan rute.
-- Middleware adalah fungsi-fungsi yang dieksekusi dalam urutan tertentu.
-
----
-
-## Middleware dalam Node.js
-
-```javascript
-const http = require('http')
-
-const middleware = (req, res, next) => {
-  console.log('Middleware dipanggil')
-  next()
-}
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' })
-  res.end('Hello World!\n')
-})
-
-server.on('request', middleware)
 
 const port = 3000
 

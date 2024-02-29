@@ -7,7 +7,7 @@ theme: one
 
 ---
 
-## Basis Data (Database)
+# Basis Data (Database)
 
 - Basis data sangat penting untuk menyimpan, mengorganisir, dan mengambil data dalam aplikasi perangkat lunak.
 - Ada dua kategori utama basis data: SQL dan NoSQL.
@@ -15,7 +15,7 @@ theme: one
 
 ---
 
-## Apa Itu SQL?
+# Apa Itu SQL?
 
 - SQL singkatan dari "Structured Query Language."
 - Ini adalah bahasa domain-khusus untuk mengelola basis data relasional.
@@ -24,7 +24,7 @@ theme: one
 
 ---
 
-## Fitur-fitur SQL
+# Fitur-fitur SQL
 
 - Properti ACID (Atomicity, Consistency, Isolation, Durability) untuk integritas data.
 - Skema untuk mendefinisikan struktur data.
@@ -33,7 +33,7 @@ theme: one
 
 ---
 
-## Contoh Basis Data SQL
+# Contoh Basis Data SQL
 
 - MySQL
 - PostgreSQL
@@ -42,7 +42,7 @@ theme: one
 
 ---
 
-## Kasus Penggunaan SQL
+# Kasus Penggunaan SQL
 
 - Aplikasi yang memerlukan data yang terstruktur dan terdefinisi dengan baik.
 - Aplikasi bisnis, situs web e-commerce, sistem keuangan.
@@ -50,7 +50,7 @@ theme: one
 
 ---
 
-## Apa Itu NoSQL?
+# Apa Itu NoSQL?
 
 - Basis data NoSQL dirancang untuk data yang fleksibel dan tidak terstruktur.
 - Mereka tidak menggunakan tabel, tetapi menggunakan model data yang berbeda, seperti pasangan kunci-nilai, dokumen, grafik, atau toko kolom lebar.
@@ -58,7 +58,7 @@ theme: one
 
 ---
 
-## Fitur-fitur NoSQL
+# Fitur-fitur NoSQL
 
 - Tidak terbatas oleh skema.
 - Skalabilitas horizontal untuk menangani jumlah data yang besar.
@@ -67,7 +67,7 @@ theme: one
 
 ---
 
-## Contoh Basis Data NoSQL
+# Contoh Basis Data NoSQL
 
 - MongoDB (Basis data Dokumen)
 - Cassandra (Basis data Kolom Lebar)
@@ -76,7 +76,7 @@ theme: one
 
 ---
 
-## Kasus Penggunaan NoSQL
+# Kasus Penggunaan NoSQL
 
 - Aplikasi data besar dengan volume data yang tinggi dan tidak terstruktur.
 - Aplikasi waktu nyata, seperti media sosial dan IoT.
@@ -84,7 +84,7 @@ theme: one
 
 ---
 
-## Pemilihan yang Tepat
+# Pemilihan yang Tepat
 
 - Pemilihan antara SQL dan NoSQL tergantung pada persyaratan sebuah sistem.
 - SQL cocok untuk data yang terstruktur dan integritas data.
@@ -93,7 +93,7 @@ theme: one
 
 ---
 
-## Kesimpulan
+# Kesimpulan
 
 - Basis data adalah fundamental untuk mengelola dan menyimpan data dalam aplikasi.
 - Basis data SQL dan NoSQL menawarkan kemampuan yang berbeda dan sesuai dengan kasus penggunaan yang berbeda.
@@ -101,6 +101,6 @@ theme: one
 
 ---
 
-## Terima Kasih!
+# Terima Kasih!
 
 Ada Pertanyaan?

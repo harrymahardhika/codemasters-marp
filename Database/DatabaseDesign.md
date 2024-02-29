@@ -1,15 +1,15 @@
 ---
-theme: one
 marp: true
+theme: one
+class:
+  - invert
 ---
 
 # Database Design
 
-The Art and Science of Structuring Data
-
 ---
 
-## Introduction
+# Introduction
 
 - Perancangan basis data adalah proses menciptakan solusi penyimpanan data yang terstruktur dan efisien.
 - Basis data yang dirancang dengan baik sangat penting untuk integritas data dan kinerja aplikasi.
@@ -17,7 +17,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Langkah dalam Perancangan Basis Data
+# Langkah dalam Perancangan Basis Data
 
 1. **Analisis Persyaratan**: Memahami data dan hubungannya.
 2. **Diagram Entitas-Hubungan (ERD)**: Membuat representasi visual entitas dan hubungannya.
@@ -29,7 +29,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Analisis Persyaratan
+# Analisis Persyaratan
 
 - Memahami data: Data apa yang perlu disimpan?
 - Mengidentifikasi entitas: Objek atau konsep utama apa yang ada?
@@ -39,7 +39,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Diagram Entitas-Hubungan (ERD)
+# Diagram Entitas-Hubungan (ERD)
 
 - ERD adalah representasi visual dari model data.
 - Entitas direpresentasikan sebagai tabel, dan hubungan ditampilkan sebagai garis yang menghubungkan tabel.
@@ -48,15 +48,92 @@ The Art and Science of Structuring Data
 
 ---
 
-## Normalisasi
+# Normalisasi
 
 - Normalisasi adalah proses mengorganisir data secara efisien ke dalam tabel.
 - Mengurangi redundansi data dan memastikan integritas data.
 - Mengikuti bentuk normal, seperti 1NF, 2NF, dan 3NF, untuk menghilangkan anomali data.
+- **Tujuan:** Meningkatkan efisiensi penyimpanan dan memudahkan pemeliharaan database
 
 ---
 
-## Hubungan Tabel
+# Normalisasi: Bentuk Normal Pertama (1NF)
+
+**Definisi:** Tabel harus memiliki:
+
+- Bentuk relasional
+- Nilai atomik (tidak bisa dibagi lagi)
+
+---
+
+# Normalisasi: Bentuk Normal Pertama (1NF)
+
+**Contoh:**
+
+| ID_Pesanan | Nama_Pelanggan | Produk            |
+| ---------- | -------------- | ----------------- |
+| 1          | Andi           | Pensil, Penghapus |
+
+**Menjadi**
+
+| ID_Pesanan | Nama_Pelanggan | Produk    |
+| ---------- | -------------- | --------- |
+| 1          | Andi           | Pensil    |
+| 1          | Andi           | Penghapus |
+
+---
+
+# Normalisasi: Bentuk Normal Kedua (2NF)
+
+**Definisi:** Harus dalam 1NF dan semua atribut non-kunci harus sepenuhnya bergantung pada primary key.
+
+**Contoh:**
+
+| ID_Pesanan | Nama_Pelanggan | Produk    | Harga |
+| ---------- | -------------- | --------- | ----- |
+| 1          | Andi           | Pensil    | 5000  |
+| 1          | Andi           | Penghapus | 3000  |
+
+---
+
+# Normalisasi: Bentuk Normal Kedua (2NF)
+
+**Tabel Pesanan**
+| ID_Pesanan | Nama_Pelanggan |
+|------------|----------------|
+| 1 | Andi |
+
+**Tabel Detail Pesanan**
+| ID_DetailPesanan| ID_Pesanan | Produk | Harga |
+|-----------------|------------|--------|-------|
+| 1 | 1 | Pensil | 5000 |
+| 2 | 1 | Penghapus | 3000 |
+
+---
+
+# Normalisasi: Bentuk Normal Ketiga (3NF)
+
+**Definisi:** Harus dalam 2NF dan tidak ada atribut non-kunci yang bergantung transitif pada primary key.
+
+---
+
+# Normalisasi: Bentuk Normal Ketiga (3NF)
+
+**Tabel Pesanan**
+| ID_Pesanan | Nama_Pelanggan | Alamat |
+|------------|----------------|------------------|
+| 1 | Andi | Jl. Merdeka No.5 |
+
+**Tabel Pelanggan**
+| Nama_Pelanggan | Alamat |
+|----------------|------------------|
+| Andi | Jl. Merdeka No.5 |
+
+Menghapus **Alamat** dari **Tabel Pesanan** karena bergantung pada **Nama_Pelanggan**, bukan pada **ID_Pesanan**.
+
+---
+
+# Hubungan Tabel
 
 - Tentukan bagaimana tabel berhubungan satu sama lain.
 - Gunakan primary key dan foreign key untuk mendirikan koneksi.
@@ -65,7 +142,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Indeks dan Kunci
+# Indeks dan Kunci
 
 - Pilih primary key untuk setiap tabel.
 - Gunakan foreign key untuk menghubungkan tabel.
@@ -74,7 +151,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Integritas Data
+# Integritas Data
 
 - Terapkan aturan integritas data dengan `constraints`.
 - Gunakan `constraints` untuk mencegah masukan data yang tidak valid.
@@ -82,7 +159,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Optimisasi Kinerja
+# Optimisasi Kinerja
 
 - Perancangan untuk efisiensi dalam pengambilan dan penyimpanan data.
 - Pertimbangkan penggunaan denormalisasi untuk operasi yang sering dibaca.
@@ -90,7 +167,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Jenis Data dalam Desain Basis Data
+# Jenis Data dalam Desain Basis Data
 
 - Jenis data menentukan tipe nilai yang dapat disimpan dalam kolom.
 - Beberapa jenis data umum dalam desain basis data termasuk:
@@ -102,7 +179,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Hubungan Antar Entitas
+# Hubungan Antar Entitas
 
 - Selain jenis data, hubungan antara entitas dalam desain basis data juga sangat penting.
 - Populer disebut sebagai Entity Relationship.
@@ -113,7 +190,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Contoh Hubungan Antar Entitas
+# Contoh Hubungan Antar Entitas
 
 - Contoh hubungan antar entitas one-to-one:
   - Satu pengguna memiliki satu profil.
@@ -127,7 +204,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Latihan
+# Latihan
 
 - Buatlah desain basis data untuk aplikasi toko buku online.
 - Entitas yang perlu dibuat meliputi:
@@ -141,7 +218,7 @@ The Art and Science of Structuring Data
 
 ---
 
-## Latihan
+# Latihan
 
 - Buat desain basis data untuk aplikasi pemutar musik.
 - Entitas yang perlu dibuat meliputi:
@@ -155,7 +232,22 @@ The Art and Science of Structuring Data
 
 ---
 
-## Database naming best practices
+# Latihan
+
+- Buat desain basis data untuk aplikasi belanja.
+- Entitas yang perlu dibuat meliputi:
+  - Produk
+  - Keranjang Belanja
+  - Pesanan
+- Tentukan hubungan antar entitas.
+- Tentukan atribut untuk setiap entitas.
+- Tentukan tipe data untuk setiap atribut.
+- Tentukan kunci utama dan kunci asing.
+- Tentukan aturan integritas data (constraint).
+
+---
+
+# Database naming best practices
 
 - Use plural nouns for table names, e.g. `users`, `books`, `categories`
 - Using `snake_case` for table names

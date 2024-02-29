@@ -19,8 +19,7 @@
 }
 
 code {
-  font-family: 'SF Mono', Hack, Monaco, 'JetBrainsMono Nerd Font',
-    'Google Sans Mono', monospace;
+  font-family: 'SF Mono', Hack, Monaco, 'JetBrainsMono Nerd Font', 'Google Sans Mono', monospace;
   line-height: 1.3 !important;
   letter-spacing: -1px;
 }
@@ -29,5 +28,17 @@ table {
 }
 
 section {
-  padding: 1em 2.6em;
+  padding: 1em 2.2em;
+}
+
+section > h1 {
+  margin: 0.4em 0;
+}
+
+section > h2 {
+  margin: 0.2em 0;
+}
+
+section > h3 {
+  margin: 0.2em 0;
 }

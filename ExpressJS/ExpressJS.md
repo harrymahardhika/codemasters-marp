@@ -34,18 +34,51 @@ npm install express
 # Hello World
 
 ```javascript
-const express = require("express");
-const app = express();
-const port = 3000;
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
+app.get('/', (req, res) => {
+  res.send('Hello, World!')
+})
 
 app.listen(port, () => {
-  console.log(`🚀️ on port ${port}`);
-});
+  console.log(`🚀️ on port ${port}`)
+})
 ```
+
+---
+
+# Node.js `http` vs Express.js
+
+## Node.js `http` Module
+
+- Low-level interface
+- Pengelolaan Manual
+- Fleksibilitas dan Kontrol
+- Tanpa Fitur Ekstra
+
+---
+
+# Node.js `http` vs Express.js
+
+## Express.js
+
+- High-level framework
+- Routing dan Middleware yang Disederhanakan
+- Produktivitas Ditingkatkan
+- Fitur Tambahan
+
+---
+
+# Node.js `http` vs Express.js
+
+## Apa yang Express.js Selesaikan
+
+- Penyederhanaan
+- Kecepatan Pengembangan
+- Kemudahan Penggunaan
+- Dukungan Komunitas
 
 ---
 
@@ -64,7 +97,7 @@ https://expressjs.com/en/starter/basic-routing.html
 Definisi rute memiliki struktur berikut:
 
 ```javascript
-app.METHOD(PATH, HANDLER);
+app.METHOD(PATH, HANDLER)
 ```
 
 - `app` adalah instance dari express.
@@ -77,13 +110,13 @@ app.METHOD(PATH, HANDLER);
 # Routing
 
 ```javascript
-app.get("/about", (req, res) => {
-  res.send("Halaman Tentang Kami");
-});
+app.get('/about', (req, res) => {
+  res.send('Halaman Tentang Kami')
+})
 
-app.get("/contact", (req, res) => {
-  res.send("Hubungi Kami");
-});
+app.get('/contact', (req, res) => {
+  res.send('Hubungi Kami')
+})
 ```
 
 ---
@@ -91,26 +124,26 @@ app.get("/contact", (req, res) => {
 # Simple API
 
 ```javascript
-const express = require("express");
-const app = express();
-app.use(express.json());
-require("dotenv").config();
+const express = require('express')
+const app = express()
+app.use(express.json())
+require('dotenv').config()
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
-const products = [
-  { id: 1, name: "Product A" },
-  { id: 2, name: "Product B" },
-  { id: 3, name: "Product C" },
-];
+const books = [
+  { id: 1, name: 'The Catcher in the Rye' },
+  { id: 2, name: 'To Kill a Mockingbird' },
+  { id: 3, name: '1984' },
+]
 
-app.get("/products", (req, res) => {
-  res.json(products);
-});
+app.get('/books', (req, res) => {
+  res.json(books)
+})
 
 app.listen(port, () => {
-  console.log(`🚀️ on port ${port}`);
-});
+  console.log(`🚀️ on port ${port}`)
+})
 ```
 
 ---
@@ -118,19 +151,19 @@ app.listen(port, () => {
 # Simple API
 
 ```javascript
-app.post("/products", (req, res) => {
-  const newProduct = req.body;
+app.post('/books', (req, res) => {
+  const newBook = req.body
 
-  newProduct.id = products.length + 1;
+  newBook.id = books.length + 1
 
-  while (products.find((p) => p.id === newProduct.id)) {
-    newProduct.id++;
+  while (books.find((p) => p.id === newBook.id)) {
+    newBook.id++
   }
 
-  products.push(newProduct);
+  books.push(newBook)
 
-  res.status(201).json(newProduct);
-});
+  res.status(201).json(newBook)
+})
 ```
 
 ---
@@ -167,9 +200,9 @@ Middleware digunakan untuk melakukan berbagai tugas, seperti:
 - Setiap middleware akan dipanggil satu per satu sesuai urutan mereka ditentukan dalam aplikasi Express.
 
 ```javascript
-app.use(middleware1);
-app.use(middleware2);
-app.use(middleware3);
+app.use(middleware1)
+app.use(middleware2)
+app.use(middleware3)
 ```
 
 ---
@@ -179,17 +212,17 @@ app.use(middleware3);
 ```javascript
 // middleware 1
 app.use((req, res, next) => {
-  console.log("Time:", Date.now());
-  next();
-});
+  console.log('Time:', Date.now())
+  next()
+})
 
 // middleware 2
 function loggerMiddleware(req, res, next) {
-  console.log(`Permintaan ke: ${req.method} ${req.url}`);
-  next(); // Lanjutkan ke middleware atau penanganan berikutnya.
+  console.log(`Permintaan ke: ${req.method} ${req.url}`)
+  next() // Lanjutkan ke middleware atau penanganan berikutnya.
 }
 
-app.use(loggerMiddleware);
+app.use(loggerMiddleware)
 ```
 
 ---
@@ -210,13 +243,13 @@ npm install express-handlebars --save
 ```
 
 ```javascript
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs')
 
-app.set("views", __dirname + "/views");
+app.set('views', __dirname + '/views')
 
-app.get("/profile", (req, res) => {
-  res.render("profile", { nama: "John Doe" });
-});
+app.get('/profile', (req, res) => {
+  res.render('profile', { nama: 'John Doe' })
+})
 ```
 
 ---

@@ -1,6 +1,8 @@
 ---
 marp: true
 theme: one
+class:
+  - invert
 ---
 
 # Express.js 🤝️ mysql2
@@ -9,9 +11,9 @@ theme: one
 
 # Menggunakan Express.js dengan mysql2
 
-- mysql2 adalah pustaka MySQL untuk Node.js yang memungkinkan kita berinteraksi dengan database MySQL.
+- `mysql2` adalah pustaka MySQL untuk Node.js yang memungkinkan kita berinteraksi dengan database MySQL.
 
-- Menggabungkan Express.js dengan mysql2 memungkinkan pembuatan aplikasi web yang berinteraksi dengan database MySQL.
+- Menggabungkan Express.js dengan `mysql2` memungkinkan pembuatan aplikasi web yang berinteraksi dengan database MySQL.
 
 ---
 
@@ -84,14 +86,42 @@ db.query('INSERT INTO users SET ?', newUser, (error, results) => {
 
 ### Latihan 1
 
-Buat kode untuk membuat tabel `books` dengan kolom-kolom:
+Buatlah aplikasi REST API sederhana yang dapat menampilkan data dari database `indonesian_area` yang telah dibuat pada latihan sebelumnya.
 
-- `id` (int, primary key, auto increment)
-- `title` (varchar)
-- `author` (varchar)
-- `year` (int)
-- `isbn` (varchar)
+Berikut daftar API endpoint yang perlu dibuat:
+
+- `GET /provinces` : menampilkan seluruh data provinsi
+- `GET /provinces/{id}` : menampilkan data provinsi dengan id tertentu, dan daftar kota yang berada di provinsi tersebut
+
+---
+
+# Latihan
 
 ### Latihan 2
 
-Buat kode untuk menghapus tabel `books`
+Buat Rest API untuk mengelola data buku dari database `bookstore`, berdasarkan rancangan basis data yang telah dibuat pada latihan sebelumnya.
+
+Berikut daftar API endpoint yang perlu dibuat:
+
+- `GET /books` : menampilkan seluruh data buku
+- `GET /books/{id}` : menampilkan data buku dengan id tertentu
+- `POST /books` : menambahkan data buku baru
+- `PUT /books/{id}` : mengubah data buku dengan id tertentu
+- `DELETE /books/{id}` : menghapus data buku dengan id tertentu
+
+---
+
+# Latihan
+
+### Latihan 3
+
+Buat Rest API sederhana untuk proses belanja, berdasarkan rancangan basis data yang telah dibuat pada latihan sebelumnya.
+
+Fungsi yang perlu dibuat meliputi:
+
+- Menampilkan seluruh produk
+- Menambahkan produk ke dalam keranjang belanja
+- Menampilkan seluruh produk dalam keranjang belanja
+- Menghapus produk dari keranjang belanja
+- Checkout produk dalam keranjang belanja
+- Menampilkan seluruh pesanan

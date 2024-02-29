@@ -7,6 +7,14 @@ theme: one
 
 ---
 
+# Huh?
+
+- Authentication adalah proses untuk memverifikasi identitas pengguna.
+- **Verifikasi:** memastikan identitas pengguna adalah benar.
+- Biasanya dilakukan dengan membandingkan unique identifier (username, email, atau nomor telepon) dan password.
+
+---
+
 # Menggunakan Bcrypt untuk Meng-hashing Password
 
 - Menyimpan password dengan aman sangat penting untuk keamanan aplikasi.
@@ -76,18 +84,18 @@ BCRYPT_ROUND=10
 **Meng-hashing Password**
 
 ```javascript
-const bcrypt = require("bcrypt");
-require("dotenv").config();
+import bcrypt from 'bcrypt'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const bcryptRound = process.env.BCRYPT_ROUND || 10;
-const password = "passwordAnda";
-
+const bcryptRound = process.env.BCRYPT_ROUND || 10
+const password = 'passwordAnda'
 bcrypt.hash(password, bcryptRound, (err, hash) => {
   if (err) {
-    // Tangani kesalahan
+    // Handle error
   }
-  // Simpan 'hash' di database
-});
+  // Save 'hash' to the database
+})
 ```
 
 ---
@@ -97,7 +105,7 @@ bcrypt.hash(password, bcryptRound, (err, hash) => {
 **Membandingkan Password**
 
 ```javascript
-const password = "passwordAnda";
+const password = 'passwordAnda'
 
 // Ambil 'hash' dari database
 bcrypt.compare(password, hash, (err, result) => {
@@ -109,52 +117,7 @@ bcrypt.compare(password, hash, (err, result) => {
   } else {
     // Password salah
   }
-});
-```
-
----
-
-# Express.js + Sequelize + Bcrypt
-
-```bash
-├── app
-│   ├── console
-│   ├── controllers
-│   ├── middlewares
-│   ├── models
-│   ├── router.js
-│   ├── support
-│   └── validators
-├── app.js
-├── config
-│   ├── auth.js
-│   └── database.js
-├── database
-│   ├── migrations
-│   └── seeders
-├── nodemon.json
-├── package.json
-├── package-lock.json
-└── server.js
-```
-
----
-
-# Menggunakan Bcrypt dengan Sequelize
-
-```javascript
-// app/models/user.js
-
-User.beforeCreate((user, options) => {
-  return bcrypt
-    .hash(user.password, bcryptRound)
-    .then((hash) => {
-      user.password = hash;
-    })
-    .catch((err) => {
-      throw new Error();
-    });
-});
+})
 ```
 
 ---
@@ -197,29 +160,28 @@ Di server, verifikasi keaslian token dan identitas pengguna.
 # Authentication
 
 ```javascript
-// app/controllers/auth.js
-router.post("/", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({
+router.post('/', async (req, res) => {
+  const { email, password } = req.body
+  const user = await prisma.user.findUnique({
     where: { email: email },
-  });
+  })
 
   if (!user) {
-    res.status(422).send({ error: "Invalid credentials" });
-    return;
+    res.status(422).send({ error: 'Invalid credentials' })
+    return
   }
 
-  const validPassword = await bcrypt.compare(password, user.password);
+  const validPassword = await bcrypt.compare(password, user.password)
   if (!validPassword) {
-    res.status(422).send({ error: "Invalid credentials" });
-    return;
+    res.status(422).send({ error: 'Invalid credentials' })
+    return
   }
 
-  const token = Buffer.from(randomString.generate()).toString("base64");
-  await Token.create({ userId: user.id, token: token });
+  const token = Buffer.from(randomString.generate()).toString('base64')
+  await prisma.token.create({ data: { userId: user.id, token: token } })
 
-  res.send({ token: token });
-});
+  res.send({ token: token })
+})
 ```
 
 ---
@@ -233,9 +195,9 @@ npm install randomstring
 ```
 
 ```javascript
-const randomString = require("randomstring");
+import randomString from 'randomstring'
 
-const token = Buffer.from(randomString.generate()).toString("base64");
+const token = Buffer.from(randomString.generate()).toString('base64')
 ```
 
 ---
@@ -245,26 +207,28 @@ const token = Buffer.from(randomString.generate()).toString("base64");
 ```javascript
 // app/middlewares/token-auth.js
 const tokenAuth = async (req, res, next) => {
-  const authorizationToken = req.headers["authorization"];
+  const authorizationToken = req.headers['authorization']
 
   if (!authorizationToken) {
-    res.status(401).send({ error: "No token provided" });
-    return;
+    res.status(401).send({ error: 'No token provided' })
+    return
   }
 
-  const userToken = await Token.findOne({
+  const userToken = await prisma.token.findUnique({
     where: { token: authorizationToken },
-  });
+  })
   if (!userToken) {
-    res.status(401).send({ error: "Invalid token" });
-    return;
+    res.status(401).send({ error: 'Invalid token' })
+    return
   }
 
-  const user = await User.findByPk(userToken.userId);
-  req.user = user.toJSON();
+  const user = await prisma.user.findUnique({
+    where: { id: userToken.userId },
+  })
+  req.user = user
 
-  next();
-};
+  next()
+}
 ```
 
 ---
@@ -272,20 +236,20 @@ const tokenAuth = async (req, res, next) => {
 # Authentication: Middleware
 
 ```javascript
-// app/controllers/books.js
-const express = require("express");
-const tokenAuth = require("../middlewares/token-auth");
-const router = express.Router();
+import express from 'express'
+import tokenAuth from '../middlewares/token-auth'
 
-router.use(tokenAuth);
+const router = express.Router()
 
-router.get("/", async (req, res) => {
+router.use(tokenAuth)
+
+router.get('/', async (req, res) => {
   // periksa data pengguna
-  const user = await req.user;
-  console.log(user);
+  const user = await req.user
+  console.log(user)
 
-  res.send({ message: "Hello World from protected routes!" });
-});
+  res.send({ message: 'Hello World from protected routes!' })
+})
 ```
 
 ---
@@ -299,30 +263,30 @@ router.get("/", async (req, res) => {
 ```javascript
 // app/support/Hash.js
 
-const bcrypt = require("bcrypt");
-const auth = require("../../config/auth");
+const bcrypt = require('bcrypt')
+const auth = require('../../config/auth')
 
 class Hash {
   static async create(password) {
     try {
-      const hash = await bcrypt.hash(password, parseInt(auth.bcryptRound));
-      return hash;
+      const hash = await bcrypt.hash(password, parseInt(auth.bcryptRound))
+      return hash
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
   static async check(password, hash) {
     try {
-      const isMatch = await bcrypt.compare(password, hash);
-      return isMatch;
+      const isMatch = await bcrypt.compare(password, hash)
+      return isMatch
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 }
 
-module.exports = Hash;
+module.exports = Hash
 ```
 
 ---
@@ -331,13 +295,13 @@ module.exports = Hash;
 
 ```javascript
 // app/models/user.js
-const Hash = require("../support/Hash");
+const Hash = require('../support/Hash')
 
 User.beforeCreate(async (user, options) => {
   return Hash.create(user.password).then((hash) => {
-    user.password = hash;
-  });
-});
+    user.password = hash
+  })
+})
 ```
 
 ---
@@ -346,29 +310,29 @@ User.beforeCreate(async (user, options) => {
 
 ```javascript
 // app/controllers/auth.js
-const Hash = require("../support/Hash");
+const Hash = require('../support/Hash')
 
-router.post("/", new AuthValidator().validate(), async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.scope("withPassword").findOne({
+router.post('/', new AuthValidator().validate(), async (req, res) => {
+  const { email, password } = req.body
+  const user = await User.scope('withPassword').findOne({
     where: { email: email },
-  });
+  })
 
   if (!user) {
-    res.status(422).send({ error: "Invalid credentials" });
-    return;
+    res.status(422).send({ error: 'Invalid credentials' })
+    return
   }
 
   if (!Hash.check(password, user.password)) {
-    res.status(422).send({ error: "Invalid credentials" });
-    return;
+    res.status(422).send({ error: 'Invalid credentials' })
+    return
   }
 
-  const token = Buffer.from(randomString.generate()).toString("base64");
-  await Token.create({ userId: user.id, token: token });
+  const token = Buffer.from(randomString.generate()).toString('base64')
+  await Token.create({ userId: user.id, token: token })
 
-  res.send({ token: token });
-});
+  res.send({ token: token })
+})
 ```
 
 ---
@@ -376,21 +340,21 @@ router.post("/", new AuthValidator().validate(), async (req, res) => {
 # TokenHandler Class
 
 ```javascript
-const { Token } = require("../../models");
+const { Token } = require('../../models')
 
 class TokenHandler {
   constructor(tokenStrategy) {
-    this.strategy = tokenStrategy;
+    this.strategy = tokenStrategy
   }
 
   async create(user) {
-    const token = this.strategy.create();
-    await Token.create({ userId: user.id, token: token });
-    return token;
+    const token = this.strategy.create()
+    await Token.create({ userId: user.id, token: token })
+    return token
   }
 
   verify(token) {
-    return this.strategy.verify(token);
+    return this.strategy.verify(token)
   }
 }
 ```
@@ -400,24 +364,24 @@ class TokenHandler {
 # TokenHandler Class
 
 ```javascript
-const { User, Token } = require("../../models");
-const randomString = require("randomstring");
+const { User, Token } = require('../../models')
+const randomString = require('randomstring')
 
 class SimpleToken {
   create() {
-    const token = Buffer.from(randomString.generate()).toString("base64");
-    return token;
+    const token = Buffer.from(randomString.generate()).toString('base64')
+    return token
   }
 
   async verify(authorizationToken) {
-    const token = await Token.findOne({ where: { token: authorizationToken } });
+    const token = await Token.findOne({ where: { token: authorizationToken } })
     if (!token) {
-      return null;
+      return null
     }
 
-    const user = await User.findByPk(token.userId);
+    const user = await User.findByPk(token.userId)
 
-    return user;
+    return user
   }
 }
 ```
@@ -427,29 +391,27 @@ class SimpleToken {
 # TokenHandler Class
 
 ```javascript
-const jwt = require("jsonwebtoken");
-const auth = require("../../../config/auth");
-const { Buffer } = require("buffer");
+const jwt = require('jsonwebtoken')
+const auth = require('../../../config/auth')
+const { Buffer } = require('buffer')
 
 class JWT {
   constructor(user) {
-    this.user = user;
+    this.user = user
   }
 
   create() {
-    const data = Buffer.from(
-      `${this.user.id}:${new Date().getTime()}`
-    ).toString("base64");
-    const token = jwt.sign(data, auth.key);
-    return token;
+    const data = Buffer.from(`${this.user.id}:${new Date().getTime()}`).toString('base64')
+    const token = jwt.sign(data, auth.key)
+    return token
   }
 
   verify(authorizationToken) {
     try {
-      const decoded = jwt.verify(authorizationToken, auth.key);
-      return decoded;
+      const decoded = jwt.verify(authorizationToken, auth.key)
+      return decoded
     } catch (error) {
-      return null; // Token is invalid
+      return null // Token is invalid
     }
   }
 }
